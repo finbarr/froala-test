@@ -13,7 +13,6 @@ module.exports = {
   },
   resolve: {
     modules: ["node_modules"]
-    // extensions: [".web.js", ".mjs", ".js", ".json", ".web.jsx", ".jsx"],
   },
   module: {
     strictExportPresence: true,
@@ -47,17 +46,9 @@ module.exports = {
             include: paths.appSrc,
             loader: require.resolve("babel-loader"),
             options: {
-              // This is a feature of `babel-loader` for webpack (not Babel itself).
-              // It enables caching results in ./node_modules/.cache/babel-loader/
-              // directory for faster rebuilds.
               cacheDirectory: true
             }
           },
-          // "postcss" loader applies autoprefixer to our CSS.
-          // "css" loader resolves paths in CSS and adds assets as dependencies.
-          // "style" loader turns CSS into JS modules that inject <style> tags.
-          // In production, we use a plugin to extract that CSS to a file, but
-          // in development "style" loader enables hot editing of CSS.
           {
             test: /\.css$/,
             use: [
@@ -71,8 +62,6 @@ module.exports = {
               {
                 loader: require.resolve("postcss-loader"),
                 options: {
-                  // Necessary for external CSS imports to work
-                  // https://github.com/facebookincubator/create-react-app/issues/2677
                   ident: "postcss",
                   plugins: () => [
                     require("postcss-flexbugs-fixes"),
@@ -108,14 +97,9 @@ module.exports = {
           }
         ]
       }
-      // ** STOP ** Are you adding a new loader?
-      // Make sure to add the new loader(s) before the "file" loader.
     ]
   },
   plugins: [
-    // new webpack.NamedModulesPlugin(),
-    // new webpack.HotModuleReplacementPlugin(),
-    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new webpack.ProvidePlugin({
       "window.jQuery": "jquery",
       "window.$": "jquery",
